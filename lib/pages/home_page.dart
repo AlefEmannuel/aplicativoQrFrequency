@@ -7,12 +7,13 @@ import 'package:flutter/services.dart';
 import '../classes/user.dart';
 import 'package:http/http.dart' as http;
 
+import 'listar_frequencias.dart';
+
 
 class HomePage extends StatefulWidget {
   final Usuario usuario;
 
-  const HomePage({Key key, this.usuario}): super(key: key);
-  
+  const HomePage({Key key, this.usuario}): super(key: key);  
   
   @override
   _HomePageState createState() => _HomePageState(usuario: this.usuario);
@@ -53,13 +54,9 @@ class _HomePageState extends State<HomePage> {
             ),
             new Divider(),
             new ListTile(
-              title: new Text("Perfil"),
-              trailing: new Icon(Icons.perm_identity),
-            ),
-            new Divider(),
-            new ListTile(
               title: new Text("Ver minhas frequências"),
               trailing: new Icon(Icons.reorder),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new ListarFrequencias(usuario: usuario))),
             ),
             new Divider(),
             new ListTile(
@@ -77,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 Future scan(String matricula) async {
-    var url = "http://192.168.1.9:9000/frequencias/salvarApp";
+    var url = "http://192.168.1.3:9000/frequencias/salvarApp";
     try {
       String barcode = await BarcodeScanner.scan();
       setState(() => this.barcode = barcode);

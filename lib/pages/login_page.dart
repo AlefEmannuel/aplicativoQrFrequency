@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   var matriculaResult;
   var senhaResult;
-  var url = "http://192.168.1.9:9000/logins/autenticarSuapApp";
+  var url = "http://192.168.1.3:9000/logins/autenticarSuapApp";
   //String nome,matricula,tipoVinculo,url_foto_75x100,email;
   String responseBody;
   String validador = "0";
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                           bottom: 32,
                           right: 32
                         ),
-                        child: Text('Login',
+                        child: Text('',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18
@@ -155,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                           print(matriculaResult);
                         });
                       },
+                      obscureText: true,
                     ),
                   ),
 
@@ -174,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                   Spacer(),
                   new GestureDetector(
                     onTap: () async {      
+                      print("apertou");
                       var response = await http.post(url,  body: {'matricula': matriculaResult, 'senha': senhaResult});
                       print('Response status: ${response.statusCode}');
                       print('Response body: ${response.body}');      
